@@ -2,6 +2,7 @@ package com.example.university.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.example.university.repository.StaffRepository;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class SimpleDBCrudTest {
     private UniversityService universityService;
 
     @Autowired
-    private StaffDao staffDao;
+    private StaffRepository staffRepository;
 
     private List<Staff> allStaff;
     private Optional<Staff> oneStaff;
@@ -41,17 +42,17 @@ public class SimpleDBCrudTest {
         // Test Find by Id
         Staff deanThomas = allStaff.get(0);
         System.out.println(deanThomas);
-        assertEquals(deanThomas, staffDao.findById(deanThomas.getId()).get());
+        assertEquals(deanThomas, staffRepository.findById(deanThomas.getId()).get());
 
         // Test Update, Change first Name to Patrick
         deanThomas.getMember().setFirstName("Patrick");
-        staffDao.save(deanThomas);
+        staffRepository.save(deanThomas);
 
         assertEquals("Patrick",
-                staffDao.findById(deanThomas.getId()).get().getMember().getFirstName());
+                staffRepository.findById(deanThomas.getId()).get().getMember().getFirstName());
 
-        staffDao.delete(deanThomas);
-        allStaff = staffDao.findAll();
+        staffRepository.delete(deanThomas);
+        allStaff = staffRepository.findAll();
         assertEquals(totalStaff -1, allStaff.size());
         allStaff.stream().forEach(System.out::println);
     }
