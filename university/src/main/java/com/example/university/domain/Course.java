@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * JPA Entity for a Course offered at the University.
- *
+ * <p>
  * Created by maryellenbowman.
  */
 @Entity

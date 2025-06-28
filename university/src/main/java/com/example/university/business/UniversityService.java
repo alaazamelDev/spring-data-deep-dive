@@ -14,7 +14,7 @@ import java.util.List;
  * Business Tier class for the Univeirsity Library
  */
 @Service
-public class UniversityService {
+public class    UniversityService {
 
     private DepartmentDao departmentDao;
 
@@ -74,9 +74,6 @@ public class UniversityService {
     public void deleteAll() {
         try {
             studentDao.deleteAll();
-            courseDao.deleteAll();
-            departmentDao.deleteAll();
-            staffDao.deleteAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
