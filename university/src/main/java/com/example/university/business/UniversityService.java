@@ -1,81 +1,82 @@
 package com.example.university.business;
 
-import com.example.university.dao.CourseDao;
-import com.example.university.dao.DepartmentDao;
-import com.example.university.dao.StaffDao;
-import com.example.university.dao.StudentDao;
-import com.example.university.domain.*;
-import org.springframework.stereotype.Repository;
+import com.example.university.domain.Course;
+import com.example.university.domain.Department;
+import com.example.university.domain.Person;
+import com.example.university.domain.Staff;
+import com.example.university.domain.Student;
+import com.example.university.repository.CourseRepository;
+import com.example.university.repository.DepartmentRepository;
+import com.example.university.repository.StaffRepository;
+import com.example.university.repository.StudentRepository;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
- * Business Tier class for the Univeirsity Library
+ * Business Tier class for the University Library
  */
 @Service
+@RequiredArgsConstructor
 public class UniversityService {
 
-    private DepartmentDao departmentDao;
+  private final DepartmentRepository departmentRepository;
+  private final StudentRepository studentRepository;
+  private final CourseRepository courseRepository;
+  private final StaffRepository staffRepository;
 
-    private StaffDao staffDao;
 
-    private StudentDao studentDao;
+  public Student createStudent(String firstName, String lastName, boolean fullTime, int age) {
+    return studentRepository.save(new Student(new Person(firstName, lastName), fullTime, age));
+  }
 
-    private CourseDao courseDao;
+  public Staff createFaculty(String firstName, String lastName) {
+    return staffRepository.save(new Staff(new Person(firstName, lastName)));
+  }
 
-    public UniversityService(CourseDao courseDao, DepartmentDao departmentDao, StaffDao staffDao, StudentDao studentDao) {
-        this.courseDao = courseDao;
-        this.departmentDao = departmentDao;
-        this.staffDao = staffDao;
-        this.studentDao = studentDao;
+  public Department createDepartment(String deptname, Staff deptChair) {
+    return departmentRepository.save(new Department(deptname, deptChair));
+  }
+
+  public Course createCourse(String name, int credits, Staff professor, Department department) {
+    return courseRepository.save(new Course(name, credits, professor, department));
+  }
+
+  public Course createCourse(
+      String name,
+      int credits,
+      Staff professor,
+      Department department,
+      Course... prereqs
+  ) {
+    Course c = new Course(name, credits, professor, department);
+    for (Course p : prereqs) {
+      c.addPrerequisite(p);
     }
+    return courseRepository.save(c);
+  }
 
-    public Student createStudent(String firstName, String lastName, boolean fullTime, int age) {
-        return studentDao.save(new Student(new Person(firstName, lastName), fullTime, age));
-    }
+  public List<Course> findAllCourses() {
+    return courseRepository.findAll();
+  }
 
-    public Staff createFaculty(String firstName, String lastName) {
-        return staffDao.save(new Staff(new Person(firstName, lastName)));
-    }
+  public List<Staff> findAllStaff() {
+    return staffRepository.findAll();
+  }
 
-    public Department createDepartment(String deptname, Staff deptChair) {
-        return departmentDao.save(new Department(deptname, deptChair));
-    }
+  public List<Department> findAllDepartments() {
+    return departmentRepository.findAll();
+  }
 
-    public Course createCourse(String name, int credits, Staff professor, Department department) {
-        return courseDao.save(new Course(name, credits, professor, department));
-    }
+  public List<Student> findAllStudents() {
+    return studentRepository.findAll();
+  }
 
-    public Course createCourse(String name, int credits, Staff professor, Department department, Course... prereqs) {
-        Course c = new Course(name, credits, professor, department);
-        for (Course p : prereqs) {
-            c.addPrerequisite(p);
-        }
-        return courseDao.save(c);
+  public void deleteAll() {
+    try {
+      studentRepository.deleteAll();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
-
-    public List<Course> findAllCourses() {
-        return courseDao.findAll();
-    }
-
-    public List<Staff> findAllStaff() {
-        return staffDao.findAll();
-    }
-
-    public List<Department> findAllDepartments() {
-        return departmentDao.findAll();
-    }
-
-    public List<Student> findAllStudents() {
-        return studentDao.findAll();
-    }
-
-    public void deleteAll() {
-        try {
-            studentDao.deleteAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+  }
 }

@@ -1,0 +1,19 @@
+Index: src/main/java/com/example/university/business/UniversityService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.university.business;\n\nimport com.example.university.dao.CourseDao;\nimport com.example.university.dao.DepartmentDao;\nimport com.example.university.dao.StaffDao;\nimport com.example.university.dao.StudentDao;\nimport com.example.university.domain.*;\nimport org.springframework.stereotype.Repository;\nimport org.springframework.stereotype.Service;\n\nimport java.util.List;\n\n/**\n * Business Tier class for the Univeirsity Library\n */\n@Service\npublic class    UniversityService {\n\n    private DepartmentDao departmentDao;\n\n    private StaffDao staffDao;\n\n    private StudentDao studentDao;\n\n    private CourseDao courseDao;\n\n    public UniversityService(CourseDao courseDao, DepartmentDao departmentDao, StaffDao staffDao, StudentDao studentDao) {\n        this.courseDao = courseDao;\n        this.departmentDao = departmentDao;\n        this.staffDao = staffDao;\n        this.studentDao = studentDao;\n    }\n\n    public Student createStudent(String firstName, String lastName, boolean fullTime, int age) {\n        return studentDao.save(new Student(new Person(firstName, lastName), fullTime, age));\n    }\n\n    public Staff createFaculty(String firstName, String lastName) {\n        return staffDao.save(new Staff(new Person(firstName, lastName)));\n    }\n\n    public Department createDepartment(String deptname, Staff deptChair) {\n        return departmentDao.save(new Department(deptname, deptChair));\n    }\n\n    public Course createCourse(String name, int credits, Staff professor, Department department) {\n        return courseDao.save(new Course(name, credits, professor, department));\n    }\n\n    public Course createCourse(String name, int credits, Staff professor, Department department, Course... prereqs) {\n        Course c = new Course(name, credits, professor, department);\n        for (Course p : prereqs) {\n            c.addPrerequisite(p);\n        }\n        return courseDao.save(c);\n    }\n\n    public List<Course> findAllCourses() {\n        return courseDao.findAll();\n    }\n\n    public List<Staff> findAllStaff() {\n        return staffDao.findAll();\n    }\n\n    public List<Department> findAllDepartments() {\n        return departmentDao.findAll();\n    }\n\n    public List<Student> findAllStudents() {\n        return studentDao.findAll();\n    }\n\n    public void deleteAll() {\n        try {\n            studentDao.deleteAll();\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/university/business/UniversityService.java b/src/main/java/com/example/university/business/UniversityService.java
+--- a/src/main/java/com/example/university/business/UniversityService.java	(revision f20b05721e8b03b4148844dde91a63b4a1230d7d)
++++ b/src/main/java/com/example/university/business/UniversityService.java	(date 1751120994091)
+@@ -74,7 +74,7 @@
+     public void deleteAll() {
+         try {
+             studentDao.deleteAll();
+-        } catch (Exception e) {
++                } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
