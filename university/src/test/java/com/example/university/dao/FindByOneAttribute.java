@@ -3,15 +3,14 @@ package com.example.university.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.example.university.business.UniversityService;
+import com.example.university.domain.Course;
+import com.example.university.repository.CourseRepository;
+import com.example.university.repository.StudentRepository;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.example.university.business.UniversityService;
-import com.example.university.domain.Course;
-import com.example.university.domain.Staff;
 
 /**
  * Tests that query by one attribute
@@ -19,42 +18,55 @@ import com.example.university.domain.Staff;
 @SpringBootTest
 public class FindByOneAttribute {
 
-    @Autowired
-    private UniversityService universityService;
+  @Autowired
+  private UniversityService universityService;
 
-    @Autowired
-    private StudentDao studentDao;
+  @Autowired
+  private StudentRepository studentRepository;
 
-    @Autowired
-    private CourseDao courseDao;
+  @Autowired
+  private CourseRepository courseRepository;
 
-    private List<Staff> allStaff;
-    @Test
-    public void findByOneAttribute() {
-        // Test Create
-        UniversityFactory.fillUniversity(universityService);
+  @Test
+  public void findByOneAttribute() {
+    // Test Create
+    UniversityFactory.fillUniversity(universityService);
 
-        studentDao.findByFullTime(true).stream().forEach(s -> assertTrue(s.isFullTime()));
+    studentRepository.findByFullTime(true).forEach(s -> assertTrue(s.isFullTime()));
 
-        studentDao.findByAge(20).stream().forEach(student -> assertTrue(student.getAge() == 20));
+    studentRepository.findByAge(20).forEach(student -> assertEquals(20, student.getAge()));
 
-        studentDao.findByLastName("King").stream()
-                .forEach(s -> assertTrue(s.getAttendee().getLastName().equals("King")));
+    studentRepository.findByAttendeeLastName("King")
+        .forEach(s -> assertEquals("King", s.getAttendee().getLastName()));
 
+    List<Course> allCourses = universityService.findAllCourses();
+    Course firstCourse = allCourses.getFirst();
 
-        List<Course> allCourses = universityService.findAllCourses();
-        Course firstCourse = allCourses.get(0);
+    assertEquals(firstCourse, courseRepository.findByName(firstCourse.getName()).get());
 
-        assertEquals(firstCourse, courseDao.findByName(firstCourse.getName()).get());
+    assertEquals(firstCourse.getDepartment().getChair().getMember().getLastName(),
+        courseRepository.findByDepartmentChairMemberLastName(
+                firstCourse
+                    .getDepartment()
+                    .getChair()
+                    .getMember()
+                    .getLastName()
+            )
+            .getFirst()
+            .getDepartment()
+            .getChair()
+            .getMember()
+            .getLastName()
+    );
 
-        assertEquals(firstCourse.getDepartment().getChair().getMember().getLastName(),
-                courseDao.findByChairLastName(firstCourse.getDepartment().getChair().getMember().getLastName())
-                    .get(0).getDepartment().getChair().getMember().getLastName());
+    Course courseWithPrerequisites = allCourses.stream()
+        .filter(x -> !x.getPrerequisites().isEmpty())
+        .findFirst()
+        .get();
 
-        Course courseWithPrerequisites = allCourses.stream().filter(x->x.getPrerequisites().size() > 0).findFirst().get();
- 
-        Course prerequisite = courseWithPrerequisites.getPrerequisites().get(0);
-        assertTrue(courseDao.findByPrerequisites(prerequisite).contains(courseWithPrerequisites));
-        courseDao.findByCredits(3).stream().forEach(x-> assertEquals(3, x.getCredits()));
-    }
+    Course prerequisite = courseWithPrerequisites.getPrerequisites().getFirst();
+    assertTrue(
+        courseRepository.findByPrerequisites(prerequisite).contains(courseWithPrerequisites));
+    courseRepository.findByCredits(3).forEach(x -> assertEquals(3, x.getCredits()));
+  }
 }

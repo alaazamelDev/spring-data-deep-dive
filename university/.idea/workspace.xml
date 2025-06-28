@@ -4,13 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d02634a-d587-44f0-ac7c-bd3b4af0c4dd" name="Changes" comment="refactor and upgrade to spring boot data">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/business/UniversityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/university/business/UniversityService.java" afterDir="false" />
+    <list default="true" id="1d02634a-d587-44f0-ac7c-bd3b4af0c4dd" name="Changes" comment="fix test syntax errors">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repository/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/university/repository/CourseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/university/repository/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/university/dao/FindByOneAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/university/dao/FindByOneAttribute.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -45,12 +56,14 @@
     "JUnit.All in university (1).executor": "Run",
     "JUnit.All in university (2).executor": "Debug",
     "JUnit.All in university.executor": "Run",
+    "JUnit.FindByOneAttribute.findByOneAttribute.executor": "Run",
     "JUnit.SimpleDBCrudTest.executor": "Run",
     "JUnit.SimpleDBCrudTest.testStaffCrud.executor": "Run",
     "JUnit.java in university.executor": "Run",
     "Maven.university [clean,install].executor": "Run",
     "Maven.university [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "02__03b",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -60,7 +73,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.SimpleDBCrudTest">
+  <component name="RunManager" selected="JUnit.FindByOneAttribute.findByOneAttribute">
     <configuration name="All in university (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="university" />
       <option name="PACKAGE_NAME" value="" />
@@ -77,10 +90,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in university" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FindByOneAttribute.findByOneAttribute" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="university" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.university.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.university.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.dao.FindByOneAttribute" />
+      <option name="METHOD_NAME" value="findByOneAttribute" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -125,11 +146,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FindByOneAttribute.findByOneAttribute" />
         <item itemvalue="JUnit.SimpleDBCrudTest" />
         <item itemvalue="JUnit.SimpleDBCrudTest.testStaffCrud" />
         <item itemvalue="JUnit.All in university (2)" />
         <item itemvalue="JUnit.All in university (1)" />
-        <item itemvalue="JUnit.All in university" />
       </list>
     </recent_temporary>
   </component>
@@ -154,6 +175,7 @@
       <workItem from="1751010351243" duration="1567000" />
       <workItem from="1751027267937" duration="1590000" />
       <workItem from="1751129513618" duration="2861000" />
+      <workItem from="1751121933563" duration="5591000" />
     </task>
     <task id="LOCAL-00001" summary="refactor and upgrade to spring boot data">
       <option name="closed" value="true" />
@@ -163,7 +185,23 @@
       <option name="project" value="LOCAL" />
       <updated>1751120983931</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="implement repository pattern">
+      <option name="closed" value="true" />
+      <created>1751123486947</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1751123486947</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix test syntax errors">
+      <option name="closed" value="true" />
+      <created>1751123549826</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1751123549826</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +209,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactor and upgrade to spring boot data" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor and upgrade to spring boot data" />
+    <MESSAGE value="implement repository pattern" />
+    <MESSAGE value="fix test syntax errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix test syntax errors" />
   </component>
 </project>
