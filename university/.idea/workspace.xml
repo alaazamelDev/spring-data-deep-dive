@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d02634a-d587-44f0-ac7c-bd3b4af0c4dd" name="Changes" comment="fix test syntax errors">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repository/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/university/repository/CourseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/university/repository/StudentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/university/dao/FindByOneAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/university/dao/FindByOneAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/university/dao/FindByClausesAndExpressions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/university/dao/FindByClausesAndExpressions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +41,11 @@
     &quot;accountId&quot;: &quot;c2dc2f87-996d-4485-80ca-86a08d5a7c9b&quot;
   }
 }</component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="JUnit" name="FindByClausesAndExpressions" />
+    </enabled-run-configurations>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -56,6 +59,8 @@
     "JUnit.All in university (1).executor": "Run",
     "JUnit.All in university (2).executor": "Debug",
     "JUnit.All in university.executor": "Run",
+    "JUnit.FindByClausesAndExpressions.executor": "Run",
+    "JUnit.FindByClausesAndExpressions.findByClausesAndExpressions.executor": "Run",
     "JUnit.FindByOneAttribute.findByOneAttribute.executor": "Run",
     "JUnit.SimpleDBCrudTest.executor": "Run",
     "JUnit.SimpleDBCrudTest.testStaffCrud.executor": "Run",
@@ -73,19 +78,34 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.FindByOneAttribute.findByOneAttribute">
-    <configuration name="All in university (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.FindByClausesAndExpressions">
+    <configuration name="FindByClausesAndExpressions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="university" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.university.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.university.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.dao.FindByClausesAndExpressions" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in university (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FindByClausesAndExpressions.findByClausesAndExpressions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="university" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.university.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.university.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.dao.FindByClausesAndExpressions" />
+      <option name="METHOD_NAME" value="findByClausesAndExpressions" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -146,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FindByClausesAndExpressions" />
+        <item itemvalue="JUnit.FindByClausesAndExpressions.findByClausesAndExpressions" />
         <item itemvalue="JUnit.FindByOneAttribute.findByOneAttribute" />
         <item itemvalue="JUnit.SimpleDBCrudTest" />
         <item itemvalue="JUnit.SimpleDBCrudTest.testStaffCrud" />
-        <item itemvalue="JUnit.All in university (2)" />
-        <item itemvalue="JUnit.All in university (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -176,6 +196,7 @@
       <workItem from="1751027267937" duration="1590000" />
       <workItem from="1751129513618" duration="2861000" />
       <workItem from="1751121933563" duration="5591000" />
+      <workItem from="1751215835144" duration="3571000" />
     </task>
     <task id="LOCAL-00001" summary="refactor and upgrade to spring boot data">
       <option name="closed" value="true" />
