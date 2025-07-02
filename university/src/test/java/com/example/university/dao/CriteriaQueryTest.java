@@ -3,6 +3,8 @@ package com.example.university.dao;
 import static com.example.university.business.CourseFilter.filterBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.example.university.repo.DepartmentRepo;
+import com.example.university.repo.StaffRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,15 +27,15 @@ public class CriteriaQueryTest {
     @Autowired
     private UniversityService universityService;
     @Autowired
-    private DepartmentDao departmentDao;
+    private DepartmentRepo departmentRepo;
     @Autowired
-    private StaffDao staffDao;
+    private StaffRepo staffRepo;
 
     @Test
     void findByCriteria() {
         UniversityFactory.fillUniversity(universityService);
-        Department humanities = departmentDao.findByName("Humanities").get();
-        Staff professorBlack = staffDao.findByLastName("Black")
+        Department humanities = departmentRepo.findByName("Humanities").get();
+        Staff professorBlack = staffRepo.findByMemberLastName("Black")
                 .stream().findFirst().get();
 
         System.out.println('\n' + "*** All Humanities Courses");
