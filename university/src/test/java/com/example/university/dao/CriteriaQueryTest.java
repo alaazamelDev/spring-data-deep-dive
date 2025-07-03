@@ -12,7 +12,6 @@ import com.example.university.business.CourseFilter;
 import com.example.university.business.DynamicQueryService;
 import com.example.university.business.UniversityService;
 import com.example.university.domain.Department;
-import com.example.university.domain.Course;
 import com.example.university.domain.Staff;
 import com.example.university.repo.DepartmentRepo;
 import com.example.university.repo.StaffRepo;
@@ -54,7 +53,7 @@ public class CriteriaQueryTest {
     }
 
     private void find(CourseFilter filter) {
-        queryService.findCoursesByCriteria(filter)
+        queryService.filterBySpecification(filter)
             .forEach(course -> {
                 assertTrue(filter.meetsCriteria(course));
                 System.out.println(course);
