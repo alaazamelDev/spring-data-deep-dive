@@ -24,18 +24,7 @@ public class DynamicQueryService {
     this.em = emf.createEntityManager();
   }
 
-  public List<Course> findCoursesByCriteria(CourseFilter filter) {
-//    CriteriaBuilder cb = em.getCriteriaBuilder();
-//    CriteriaQuery<Course> cq = cb.createQuery(Course.class);
-//    Root<Course> root = cq.from(Course.class);
-//    List<Predicate> predicates = new ArrayList<>();
-//    filter.getDepartment().ifPresent(d ->
-//        predicates.add(cb.equal(root.get("department"), d)));
-//    filter.getCredits().ifPresent(c ->
-//        predicates.add(cb.equal(root.get("credits"), c)));
-//    filter.getInstructor().ifPresent(i ->
-//        predicates.add(cb.equal(root.get("instructor"), i)));
-//    cq.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
+  public List<Course> filterBySpecification(CourseFilter filter) {
 
     Specification<Course> spec = (root, cq, cb) -> {
       List<Predicate> predicates = new ArrayList<>();
