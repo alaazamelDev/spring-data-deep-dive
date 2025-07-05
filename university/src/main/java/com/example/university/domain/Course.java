@@ -1,105 +1,117 @@
 package com.example.university.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 /**
  * JPA Entity for a Course offered at the University.
- *
+ * <p>
  * Created by maryellenbowman.
  */
+@Builder
 @Entity
-@Table(name="course")
+@Table(name = "course")
+@AllArgsConstructor
 public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Integer id;
 
-    @Column(name="name")
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Integer id;
 
-    @Column(name="credits")
-    private Integer credits;
+  @Column(name = "name")
+  private String name;
 
-    @ManyToOne
-    @JoinColumn(name="instructor_id")
-    private Staff instructor;
+  @Column(name = "credits")
+  private Integer credits;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "course_prerequisites",
-        joinColumns = @JoinColumn(name = "id_of_course"),
-        inverseJoinColumns = @JoinColumn(name = "id_prerequisite_course"))
-    private List<Course> prerequisites = new ArrayList<>();
+  @ManyToOne
+  @JoinColumn(name = "instructor_id")
+  private Staff instructor;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "course_prerequisites", joinColumns = @JoinColumn(name = "id_of_course"), inverseJoinColumns = @JoinColumn(name = "id_prerequisite_course"))
+  private List<Course> prerequisites = new ArrayList<>();
 
 
-    @ManyToOne
-    @JoinColumn(name="department_id")
-    private Department department;
+  @ManyToOne
+  @JoinColumn(name = "department_id")
+  private Department department;
 
-    public Course(String name, Integer credits, Staff instructor, Department department) {
-        this.name = name;
-        this.credits = credits;
-        this.instructor = instructor;
-        this.department = department;
+  public Course(String name, Integer credits, Staff instructor, Department department) {
+    this.name = name;
+    this.credits = credits;
+    this.instructor = instructor;
+    this.department = department;
+  }
+
+  protected Course() {
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Staff getInstructor() {
+    return instructor;
+  }
+
+  public Department getDepartment() {
+    return department;
+  }
+
+  public Course addPrerequisite(Course prerequisite) {
+    prerequisites.add(prerequisite);
+    return this;
+  }
+
+  public Integer getCredits() {
+    return credits;
+  }
+
+  public List<Course> getPrerequisites() {
+    return prerequisites;
+  }
+
+  @Override
+  public String toString() {
+    return "Course{" + "name='" + name + '\'' + ", id=" + id + ", credits=" + credits
+        + ", instructor=" + instructor + ", department=" + department.getName() + '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    protected Course() {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    Course course = (Course) o;
+    return id.equals(course.id);
+  }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Staff getInstructor() {
-        return instructor;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public Course addPrerequisite(Course prerequisite){
-        prerequisites.add(prerequisite);
-        return this;
-    }
-
-    public Integer getCredits() {
-        return credits;
-    }
-
-    public List<Course> getPrerequisites() {
-        return prerequisites;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", credits=" + credits +
-                ", instructor=" + instructor +
-                ", department=" + department.getName() +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Course course = (Course) o;
-        return id.equals(course.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
 }
